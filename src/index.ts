@@ -4,4 +4,6 @@
  * @description Index
  */
 
+export * from "./two-factor";
 export * from "./util";
+

@@ -6,7 +6,7 @@
 
 import * as SpeakEasy from "speakeasy";
 
-export const generateTwoFAKey = (): string => {
+export const generateTwoFactorKey = (): string => {
 
     const secret: SpeakEasy.GeneratedSecret = SpeakEasy.generateSecret({
 
@@ -16,7 +16,7 @@ export const generateTwoFAKey = (): string => {
     return secret.base32;
 };
 
-export const generateTwoFAUrl = (issuer: string, account: string, key: string): string => {
+export const generateTwoFactorUrl = (issuer: string, account: string, key: string): string => {
 
     const parsedIssuer: string = encodeURIComponent(issuer);
     const parsedAccount: string = encodeURIComponent(account);
@@ -24,7 +24,7 @@ export const generateTwoFAUrl = (issuer: string, account: string, key: string): 
     return 'otpauth://totp/' + parsedAccount + '?issuer=' + parsedIssuer + '&secret=' + key;
 };
 
-export const generateTwoFACode = (key: string): string => {
+export const generateTwoFactorCode = (key: string): string => {
 
     return SpeakEasy.totp({
 
@@ -33,7 +33,7 @@ export const generateTwoFACode = (key: string): string => {
     });
 };
 
-export const verifyTwoFACode = (key: string, code: string): boolean => {
+export const verifyTwoFactorCode = (key: string, code: string): boolean => {
 
     return SpeakEasy.totp.verify({
 
