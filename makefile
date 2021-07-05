@@ -8,6 +8,10 @@ ts_node := node_modules/.bin/ts-node
 mocha := node_modules/.bin/mocha
 eslint := node_modules/.bin/eslint
 
+# Build functions
+build_utils := node_modules/.bin/build-utils
+license_package := node_modules/.bin/license-package
+
 main: dev
 
 dev:
