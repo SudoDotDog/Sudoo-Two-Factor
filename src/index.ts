@@ -6,4 +6,5 @@
 
 export * from "./two-factor";
 export * from "./util";
+export * from "./verify";
 

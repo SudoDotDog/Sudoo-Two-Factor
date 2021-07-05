@@ -25,16 +25,6 @@ export const generateTwoFactorCode = (key: string): string => {
     });
 };
 
-export const verifyTwoFactorCode = (key: string, code: string): boolean => {
-
-    return SpeakEasy.totp.verify({
-
-        token: code,
-        secret: key,
-        encoding: 'base32',
-    });
-};
-
 export const generateTwoFactorURL = (issuer: string, account: string, key: string): string => {
 
     const parsedIssuer: string = encodeURIComponent(issuer);
