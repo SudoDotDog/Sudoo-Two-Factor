@@ -34,5 +34,8 @@
     ],
     "report-dir": "coverage",
     "sourceMap": true
+  },
+  "dependencies": {
+    "speakeasy": "^2.0.0"
   }
 }
