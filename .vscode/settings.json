@@ -5,6 +5,7 @@
         "codecov",
         "mocharc",
         "sudoo",
+        "totp",
         "triforce",
         "tshook",
         "xenocount"
