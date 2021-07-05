@@ -16,14 +16,6 @@ export const generateTwoFactorKey = (): string => {
     return secret.base32;
 };
 
-export const generateTwoFactorUrl = (issuer: string, account: string, key: string): string => {
-
-    const parsedIssuer: string = encodeURIComponent(issuer);
-    const parsedAccount: string = encodeURIComponent(account);
-
-    return 'otpauth://totp/' + parsedAccount + '?issuer=' + parsedIssuer + '&secret=' + key;
-};
-
 export const generateTwoFactorCode = (key: string): string => {
 
     return SpeakEasy.totp({
@@ -41,4 +33,12 @@ export const verifyTwoFactorCode = (key: string, code: string): boolean => {
         secret: key,
         encoding: 'base32',
     });
+};
+
+export const generateTwoFactorURL = (issuer: string, account: string, key: string): string => {
+
+    const parsedIssuer: string = encodeURIComponent(issuer);
+    const parsedAccount: string = encodeURIComponent(account);
+
+    return 'otpauth://totp/' + parsedAccount + '?issuer=' + parsedIssuer + '&secret=' + key;
 };
