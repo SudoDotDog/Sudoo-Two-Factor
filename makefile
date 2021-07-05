@@ -58,11 +58,11 @@ outdated: install
 
 license: clean
 	@echo "[INFO] Sign files"
-	@NODE_ENV=development $(ts_node) script/license.ts
+	@NODE_ENV=development $(license_package) license app
 
 clean:
 	@echo "[INFO] Cleaning release files"
-	@NODE_ENV=development $(ts_node) script/clean-app.ts
+	@NODE_ENV=development $(build_utils) clean-path app
 
 publish: install tests lint license build
 	@echo "[INFO] Publishing package"
