@@ -7,11 +7,10 @@
 
 import { expect } from "chai";
 import * as Chance from "chance";
-import { TwoFactorKey } from "../../src/key";
+import { TwoFactorKey, TwoFactorVerifier } from "../../src";
 
 describe('Given (Simple) Scenario', (): void => {
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const chance: Chance.Chance = new Chance('integrate-two-factor-simple');
 
     it('should be able to generate key and get code', async (): Promise<void> => {
@@ -22,11 +21,28 @@ describe('Given (Simple) Scenario', (): void => {
         expect(code).to.have.lengthOf(6);
     });
 
-    it('should be able to verify code', async (): Promise<void> => {
+    it('should be able to generate url', async (): Promise<void> => {
+
+        const issuer: string = chance.string();
+        const account: string = chance.email();
 
         const key: TwoFactorKey = TwoFactorKey.random();
-        const code: string = key.generateCode();
+        const url: string = key.getAuthorizationURL(issuer, account);
 
-        expect(code).to.have.lengthOf(6);
+        expect(url).to.be.include(encodeURIComponent(issuer));
+        expect(url).to.be.include(encodeURIComponent(account));
+    });
+
+    it('should be able to verify code', async (): Promise<void> => {
+
+        const fixedDate: Date = new Date();
+
+        const key: TwoFactorKey = TwoFactorKey.random();
+        const verifier: TwoFactorVerifier = TwoFactorVerifier.from(key.key);
+
+        const code: string = key.generateCode(fixedDate);
+        const result: boolean = verifier.verify(code, fixedDate);
+
+        expect(result).to.be.true;
     });
 });

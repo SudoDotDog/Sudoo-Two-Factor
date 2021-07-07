@@ -7,7 +7,7 @@
 
 import { expect } from "chai";
 import * as Chance from "chance";
-import { generateTwoFactorKey, generateTwoFactorURL } from "../../src/util";
+import { generateTwoFactorKey, generateTwoFactorURL } from "../../src";
 
 describe('Given [Util] Helper Functions', (): void => {
 

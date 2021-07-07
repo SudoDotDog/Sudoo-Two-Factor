@@ -26,6 +26,10 @@ export class TwoFactorKey {
         this._key = key;
     }
 
+    public get key(): string {
+        return this._key;
+    }
+
     public getAuthorizationURL(issuer: string, account: string): string {
 
         const url: string = generateTwoFactorURL(issuer, account, this._key);

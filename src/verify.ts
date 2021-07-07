@@ -26,6 +26,10 @@ export class TwoFactorVerifier {
         this._window = 0;
     }
 
+    public get key(): string {
+        return this._key;
+    }
+
     public setStep(step: number): this {
 
         this._step = step;
