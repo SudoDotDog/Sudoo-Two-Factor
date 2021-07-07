@@ -4,25 +4,46 @@
  * @description Verify
  */
 
-import * as SpeakEasy from "speakeasy";
+import { verifyTwoFactorCode } from "./util";
 
-export type TwoFactorVerifyConfig = {
+export class TwoFactorVerifier {
 
-    readonly step?: number;
-    readonly window?: number;
-};
+    public static from(key: string): TwoFactorVerifier {
 
-export const verifyTwoFactorCode = (key: string, code: string, date: Date): boolean => {
+        return new TwoFactorVerifier(key);
+    }
 
-    return SpeakEasy.totp.verify({
+    private readonly _key: string;
 
-        token: code,
-        secret: key,
-        encoding: 'base32',
+    private _step: number;
+    private _window: number;
 
-        time: Math.floor(date.getTime() / 1000),
-        step: 30,
-        digits: 6,
-        window: 0,
-    });
-};
+    private constructor(key: string) {
+
+        this._key = key;
+
+        this._step = 30;
+        this._window = 0;
+    }
+
+    public setStep(step: number): this {
+
+        this._step = step;
+        return this;
+    }
+
+    public setWindow(window: number): this {
+
+        this._window = window;
+        return this;
+    }
+
+    public verify(code: string, date: Date = new Date()): boolean {
+
+        return verifyTwoFactorCode(this._key, code, date, {
+
+            step: this._step,
+            window: this._window,
+        });
+    }
+}

@@ -34,3 +34,24 @@ export const generateTwoFactorURL = (issuer: string, account: string, key: strin
 
     return 'otpauth://totp/' + parsedAccount + '?issuer=' + parsedIssuer + '&secret=' + key;
 };
+
+export type TwoFactorVerifyConfig = {
+
+    readonly step: number;
+    readonly window: number;
+};
+
+export const verifyTwoFactorCode = (key: string, code: string, date: Date, config: TwoFactorVerifyConfig): boolean => {
+
+    return SpeakEasy.totp.verify({
+
+        token: code,
+        secret: key,
+        encoding: 'base32',
+
+        time: Math.floor(date.getTime() / 1000),
+        step: config.step,
+        window: config.window,
+        digits: 6,
+    });
+};
