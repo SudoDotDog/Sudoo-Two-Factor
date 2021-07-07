@@ -17,7 +17,7 @@ describe('Given [Util] Helper Functions', (): void => {
 
         const key: string = generateTwoFactorKey();
 
-        expect(key).to.have.lengthOf(32);
+        expect(key.length).to.be.greaterThan(32);
     });
 
     it('should be able to generate url', async (): Promise<void> => {
