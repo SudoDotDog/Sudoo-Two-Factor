@@ -15,6 +15,9 @@
     "url": "https://github.com/SudoDotDog/Sudoo-Two-Factor/issues"
   },
   "homepage": "https://github.com/SudoDotDog/Sudoo-Two-Factor#readme",
+  "dependencies": {
+    "speakeasy": "^2.0.0"
+  },
   "devDependencies": {
     "@sudoo/build-utils": "^1.0.0",
     "@sudoo/license": "^1.1.0",
@@ -35,8 +38,5 @@
     ],
     "report-dir": "coverage",
     "sourceMap": true
-  },
-  "dependencies": {
-    "speakeasy": "^2.0.0"
   }
 }
