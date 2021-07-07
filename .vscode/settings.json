@@ -8,8 +8,7 @@
         "sudoo",
         "totp",
         "triforce",
-        "tshook",
-        "xenocount"
+        "tshook"
     ],
     "eslint.options": {
         "configFile": "./typescript/.eslintrc.json"
