@@ -45,4 +45,41 @@ describe('Given (Simple) Scenario', (): void => {
 
         expect(result).to.be.true;
     });
+
+    it('should be able to verify code with window - happy path', async (): Promise<void> => {
+
+        const fixedDate: Date = new Date();
+        const mergedDate: Date = new Date();
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        mergedDate.setSeconds(mergedDate.getSeconds() - 30);
+
+        const key: TwoFactorKey = TwoFactorKey.random();
+        const verifier: TwoFactorVerifier = TwoFactorVerifier.from(key.key);
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        verifier.setWindow(30);
+
+        const code: string = key.generateCode(mergedDate);
+        const result: boolean = verifier.verify(code, fixedDate);
+
+        expect(result).to.be.true;
+    });
+
+    it('should be able to verify code with window - sad path', async (): Promise<void> => {
+
+        const fixedDate: Date = new Date();
+        const mergedDate: Date = new Date();
+
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        mergedDate.setSeconds(mergedDate.getSeconds() - 30);
+
+        const key: TwoFactorKey = TwoFactorKey.random();
+        const verifier: TwoFactorVerifier = TwoFactorVerifier.from(key.key);
+
+        const code: string = key.generateCode(mergedDate);
+        const result: boolean = verifier.verify(code, fixedDate);
+
+        expect(result).to.be.false;
+    });
 });
