@@ -4,7 +4,7 @@
  * @description Index
  */
 
-export * from "./two-factor";
+export * from "./key";
 export * from "./util";
 export * from "./verify";
 

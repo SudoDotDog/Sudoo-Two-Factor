@@ -6,6 +6,12 @@
 
 import * as SpeakEasy from "speakeasy";
 
+export type TwoFactorVerifyConfig = {
+
+    readonly step?: number;
+    readonly window?: number;
+};
+
 export const verifyTwoFactorCode = (key: string, code: string, date: Date): boolean => {
 
     return SpeakEasy.totp.verify({

@@ -16,12 +16,14 @@ export const generateTwoFactorKey = (): string => {
     return secret.base32;
 };
 
-export const generateTwoFactorCode = (key: string): string => {
+export const generateTwoFactorCode = (key: string, date: Date): string => {
 
     return SpeakEasy.totp({
 
         secret: key,
         encoding: 'base32',
+
+        time: Math.floor(date.getTime() / 1000),
     });
 };
 
